@@ -5,11 +5,14 @@
 - clean: ['~']
 
 - link:
-    ~/.gitconfig: gitconfig
-    ~/.config/kitty: kitty
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
+    ~/.dircolors: dircolors
+    ~/.gitconfig: gitconfig
+    ~/.config/kitty: kitty
     ~/.zshrc: zshrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - [sh $DOTFILES/zplug/install.sh, Installing zplug]
+  - [source $HOME/.zshrc, Reloading zshrc]
