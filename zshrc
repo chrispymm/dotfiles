@@ -6,9 +6,9 @@ export DOTFILES="$HOME/.dotfiles"
 # your project folder that we can `c [tab]` to
 # export PROJECTS="$HOME/Code"
 
-# your default editor
-export EDITOR='vim'
-export VEDITOR='code'
+
+# Plugins {{{
+# ==============================================================================
 
 # Load Plugins
 source ~/.zplug/init.zsh
@@ -22,11 +22,33 @@ zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug 'dracula/zsh', as:theme
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+if ! zplug check; then
+    zplug install
 fi
 
-zplug load --verbose
+# Load all plugins
+zplug load
+
+# }}}
+
+# Configuration {{{
+# ==============================================================================
+
+# your default editor
+export EDITOR='vim'
+export VEDITOR='code'
+export GIT_EDITOR=vim
+
+unsetopt sharehistory
+# }}}
+
+# Aliases & Functions {{{
+# ==============================================================================
+
+# Git
+alias g="git"
+alias gs="git status"
+alias gc="git commit -m $1"
+alias co="git checkout"
+alias glp="git log --pretty"
+# }}}
