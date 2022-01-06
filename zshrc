@@ -6,6 +6,10 @@ export DOTFILES="$HOME/.dotfiles"
 # your project folder that we can `c [tab]` to
 # export PROJECTS="$HOME/Code"
 
+# needs to be before plugins
+if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
+  alias dircolors='gdircolors'
+fi
 
 # Plugins {{{
 # ==============================================================================

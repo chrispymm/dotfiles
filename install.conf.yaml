@@ -15,4 +15,3 @@
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
   - [sh $DOTFILES/zplug/install.sh, Installing zplug]
-  - [source ~/.zshrc, Reloading zshrc]
