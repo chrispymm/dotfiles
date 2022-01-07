@@ -10,6 +10,7 @@
     ~/.dircolors: dircolors
     ~/.gitconfig: gitconfig
     ~/.config/kitty: kitty
+    ~/.config/nvim: nvim
     ~/.zshrc: zshrc
 
 - shell:

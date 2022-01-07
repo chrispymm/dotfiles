@@ -51,10 +51,22 @@ unsetopt sharehistory
 
 # Git
 alias g="git"
+alias gaa="git add -A"
 alias gs="git status"
 alias gc="git commit -m $1"
-alias co="git checkout"
+alias gco="git checkout"
+alias gpush="git push"
+alias gpull="git pull"
 alias glp="git log --pretty"
+
+# Docker
+alias d="docker"
+alias dc="docker-compose"
+alias dce="docker-compose exec"
+
+# General
+alias vim="nvim"
+
 # }}}
 
 export NVM_DIR="$HOME/.nvm"
