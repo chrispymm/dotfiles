@@ -92,3 +92,5 @@ brightblue=$(tput setaf 12)
 brightmagenta=$(tput setaf 13)
 brightcyan=$(tput setaf 14)
 brightwhite=$(tput setaf 15)
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

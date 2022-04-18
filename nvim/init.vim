@@ -89,6 +89,7 @@ imap ;; <Esc>A;<Esc>
 imap ,, <Esc>A,<Esc>
 
 " Quicker window movement
+" Commented out due to using vim-tmux-navigator
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
@@ -106,6 +107,16 @@ command! Sex Sexplore
 
 
 "--------------------------------------------------------------------------
+" Commands
+"--------------------------------------------------------------------------
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+"--------------------------------------------------------------------------
 " Plugins
 "--------------------------------------------------------------------------
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -115,18 +126,41 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin(data_dir . '/plugins')
-source ~/.config/nvim/plugins/dracula.vim
 
-
-
+Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'lifepillar/vim-solarized8'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'amiorin/vim-project'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'sheerun/vim-polyglot'
+Plug 'voldikss/vim-floaterm'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-ruby/vim-ruby'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'heavenshell/vim-jsdoc', {
+      \ 'for': ['javascript', 'javascript.jsx','typescript'],
+      \ 'do': 'make install'
+      \}
 call plug#end()
-doautocmd User PlugLoaded
 
-
-
-
+source ~/.config/nvim/plugins/dracula.vim
+source ~/.config/nvim/plugins/fzf.vim
+source ~/.config/nvim/plugins/lightline.vim
+source ~/.config/nvim/plugins/floatterm.vim
+source ~/.config/nvim/plugins/vim-project.vim
 
 
 "--------------------------------------------------------------------------
 " Miscellaneous
 "--------------------------------------------------------------------------
+runtime macros/matchit.vim
