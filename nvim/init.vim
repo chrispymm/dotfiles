@@ -1,6 +1,14 @@
 "--------------------------------------------------------------------------
 " General settings
 "--------------------------------------------------------------------------
+set path+=**
+
+set wildmode=longest:full,full
+set wildmenu
+" ignore files
+set wildignore+=**/node_modules/*
+set wildignore+=**/.git/*
+
 set expandtab
 set shiftwidth=4
 set tabstop=4
@@ -13,7 +21,6 @@ set spell spelllang=en_gb
 set title
 set ignorecase
 set smartcase
-set wildmode=longest:full,full
 set nowrap
 set list
 set listchars=tab:▸\ ,trail:·
@@ -36,7 +43,7 @@ set colorcolumn=+1
 set cursorline
 "disable automatic line wrapping at textwidth use gq to auto-wrap                                             
 "comments to textwidth                                                                                        
-set fo=cq
+set fo=cqj
 
 
 "-------------------------------------------------------------------------
@@ -45,8 +52,7 @@ set fo=cq
 let mapleader = "\<space>"
 
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
-nmap <leader>vc :edit ~/.config/nvim/coc-settings.json<cr>
-nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
+nmap <leader><cr> :source ~/.config/nvim/init.vim<cr>
 
 nmap <leader>k :nohlsearch<CR>
 nmap <leader>Q :bufdo bdelete<cr>
@@ -63,6 +69,9 @@ vnoremap > >gv
 vnoremap y myy`y
 vnoremap Y myY`y
 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " When text is wrapped, move by terminal rows, not lines, unless a count is provided
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
@@ -71,7 +80,7 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 vnoremap <leader>p "_dP
 
 " Make Y behave like the other capitals
-nnoremap Y y$
+nnoremap Y yg$
 
 " Keep it centered
 nnoremap n nzzzv
@@ -79,7 +88,7 @@ nnoremap N Nzzzv
 nnoremap J mzJ`z
 
 " Open the current file in the default program
-nmap <leader>x :!xdg-pen %<cr><cr>
+nmap <leader>x :!xdg-pen %<CR><CR>
 
 " Quicky escape to normal mode
 imap jj <esc>
@@ -88,12 +97,24 @@ imap jj <esc>
 imap ;; <Esc>A;<Esc>
 imap ,, <Esc>A,<Esc>
 
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nmap <leader>Y "+Y
+
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
 " Quicker window movement
 " Commented out due to using vim-tmux-navigator
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+nnoremap <C-Down> :resize -2<CR>
+nnoremap <C-Up> :resize +2<CR>
+nnoremap <C-Right> :vertical resize +2<CR>
+nnoremap <C-Left> :vertical resize -2<CR>
 
 " basic mapping to avoid the problem with fast fingers =P
 :command! WQ wq
@@ -128,7 +149,6 @@ endif
 call plug#begin(data_dir . '/plugins')
 
 Plug 'dracula/vim', { 'as': 'dracula' }
-"Plug 'lifepillar/vim-solarized8'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
@@ -151,6 +171,22 @@ Plug 'heavenshell/vim-jsdoc', {
       \ 'for': ['javascript', 'javascript.jsx','typescript'],
       \ 'do': 'make install'
       \}
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+
+" LSP & Completion 
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind-nvim'
+
+" Snippets
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'rafamadriz/friendly-snippets'
 call plug#end()
 
 source ~/.config/nvim/plugins/dracula.vim
@@ -158,9 +194,14 @@ source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/lightline.vim
 source ~/.config/nvim/plugins/floatterm.vim
 source ~/.config/nvim/plugins/vim-project.vim
+source ~/.config/nvim/plugins/cmp.vim
+
+
 
 
 "--------------------------------------------------------------------------
 " Miscellaneous
 "--------------------------------------------------------------------------
 runtime macros/matchit.vim
+
+
