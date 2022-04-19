@@ -8,6 +8,15 @@
 
 - clean: ['~']
 
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - [sh $DOTFILES/zplug/install.sh, Installing zplug]
+
+
+- create:
+    - ~/.config
+    - ~/.vim
+
 - link:
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
@@ -19,13 +28,9 @@
     ~/.zshrc: zshrc
     ~/bin: bin
 
-- create:
-  - ~/Projects.vim
-
 - brewfile:
     file: mac/Brewfile
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
-  - [sh $DOTFILES/zplug/install.sh, Installing zplug]
   - [chmod +x ~/bin/tat, Set tat to be executable]
+  - [touch ~/Projects.vim, Creating Projects.vim]
