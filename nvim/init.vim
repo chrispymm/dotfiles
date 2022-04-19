@@ -177,10 +177,13 @@ Plug 'nvim-lua/plenary.nvim'
 
 " LSP & Completion 
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
 
@@ -190,14 +193,15 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
 call plug#end()
 
+lua require("chrispymm")
+
 " source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/vim-code-dark.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/lightline.vim
 source ~/.config/nvim/plugins/floatterm.vim
 source ~/.config/nvim/plugins/vim-project.vim
-source ~/.config/nvim/plugins/cmp.vim
-
+" source ~/.config/nvim/plugins/cmp.vim
 
 
 
