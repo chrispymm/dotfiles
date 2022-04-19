@@ -3,9 +3,20 @@ set completeopt=menu,menuone,noselect
 lua <<EOF
   -- Setup nvim-cmp.
 
-  local cmp = require('cmp')
-  local luasnip = require('luasnip')
-  local lspkind = require('lspkind')
+  local cmp_status_ok, cmp = pcall(require, "cmp")
+  if not cmp_status_ok then
+    return
+  end
+
+  local snip_status_ok, luasnip = pcall(require, "luasnip")
+  if not snip_status_ok then
+    return
+  end 
+  
+  local kind_status_ok, lspkind = pcall(require,'lspkind')
+  if not kind_status_ok then
+      return
+  end
 
   require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -23,7 +34,7 @@ lua <<EOF
 
     mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -74,12 +85,26 @@ lua <<EOF
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
+    view = {
+      entries = {name = 'custom', selection_order = 'near_cursor' }
+    },
     experimental = {
       ghost_text = false,
       native_menu = false,
     },
     formatting = {
-      format = lspkind.cmp_format(),
+      format = lspkind.cmp_format({
+        mode = 'symbol_text', 
+        preset = 'codicons',
+        --maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+        before = function (entry, vim_item)
+          --do stuff here
+          return vim_item
+        end
+      })      
     },
   }
 

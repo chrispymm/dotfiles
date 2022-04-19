@@ -149,6 +149,7 @@ endif
 call plug#begin(data_dir . '/plugins')
 
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
@@ -189,7 +190,8 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
 call plug#end()
 
-source ~/.config/nvim/plugins/dracula.vim
+" source ~/.config/nvim/plugins/dracula.vim
+source ~/.config/nvim/plugins/vim-code-dark.vim
 source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/lightline.vim
 source ~/.config/nvim/plugins/floatterm.vim
