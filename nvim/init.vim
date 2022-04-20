@@ -54,8 +54,7 @@ let mapleader = "\<space>"
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
 nmap <leader><cr> :source ~/.config/nvim/init.vim<cr>
 
-nmap <leader>k :nohlsearch<CR>
-nmap <leader>Q :bufdo bdelete<cr>
+nmap <leader>nhl :nohlsearch<CR>
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -104,6 +103,8 @@ nmap <leader>Y "+Y
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
+nnoremap <leader>o :SymbolsOutline<CR>
+
 " Quicker window movement
 " Commented out due to using vim-tmux-navigator
 nnoremap <C-j> <C-w>j
@@ -111,10 +112,15 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-nnoremap <C-Down> :resize -2<CR>
-nnoremap <C-Up> :resize +2<CR>
-nnoremap <C-Right> :vertical resize +2<CR>
-nnoremap <C-Left> :vertical resize -2<CR>
+nnoremap <C-A-Down> :resize -2<CR>
+nnoremap <C-A-Up> :resize +2<CR>
+nnoremap <C-A-Right> :vertical resize +5<CR>
+nnoremap <C-A-Left> :vertical resize -5<CR>
+
+nnoremap <C-A-+> :resize max(map(range(1, line('$')), "col([v:val, '$'])")) - 1<CR>
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
 
 " basic mapping to avoid the problem with fast fingers =P
 :command! WQ wq
@@ -126,6 +132,8 @@ nnoremap <C-Left> :vertical resize -2<CR>
 command! Vex Vexplore
 command! Sex Sexplore
 
+inoremap <C-c> <esc>
+
 
 "--------------------------------------------------------------------------
 " Commands
@@ -133,9 +141,7 @@ command! Sex Sexplore
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-" zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
+
 
 "--------------------------------------------------------------------------
 " Plugins
@@ -154,8 +160,8 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
 Plug 'amiorin/vim-project'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -172,8 +178,6 @@ Plug 'heavenshell/vim-jsdoc', {
       \ 'for': ['javascript', 'javascript.jsx','typescript'],
       \ 'do': 'make install'
       \}
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
 
 " LSP & Completion 
 Plug 'neovim/nvim-lspconfig'
@@ -186,22 +190,34 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'onsails/lspkind-nvim'
+Plug 'simrat39/symbols-outline.nvim'
 
 " Snippets
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'rafamadriz/friendly-snippets'
+
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
 call plug#end()
 
 lua require("chrispymm")
 
 " source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/vim-code-dark.vim
-source ~/.config/nvim/plugins/fzf.vim
+" source ~/.config/nvim/plugins/fzf.vim
 source ~/.config/nvim/plugins/lightline.vim
 source ~/.config/nvim/plugins/floatterm.vim
 source ~/.config/nvim/plugins/vim-project.vim
 " source ~/.config/nvim/plugins/cmp.vim
+
+nnoremap <leader>f <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 
 
 

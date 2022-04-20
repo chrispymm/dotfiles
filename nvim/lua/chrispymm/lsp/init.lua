@@ -5,3 +5,4 @@ end
 
 require("chrispymm.lsp.lsp-installer")
 require("chrispymm.lsp.handlers").setup()
+require("chrispymm.lsp.symbols-outline");
