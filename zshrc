@@ -70,6 +70,8 @@ alias df="df -h"
 alias du="du -h"
 
 # Git
+alias lg='lazygit'
+
 alias g="git"
 alias gaa="git add -A"
 alias gs="git status"
