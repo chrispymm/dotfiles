@@ -41,6 +41,8 @@ set redrawtime=10000 " Allow more time for loading syntax on large files
 set textwidth=80
 set colorcolumn=+1
 set cursorline
+set laststatus=3
+set winbar=%=%m\ %f
 "disable automatic line wrapping at textwidth use gq to auto-wrap                                             
 "comments to textwidth                                                                                        
 set fo=cqj
@@ -58,12 +60,9 @@ call plug#begin(data_dir . '/plugins')
 
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tomasiser/vim-code-dark'
-"Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
-" Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-commentary'
-" Plug 'junegunn/t.lfzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
 " Plug 'amiorin/vim-project'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -83,7 +82,7 @@ Plug 'heavenshell/vim-jsdoc', {
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'akinsho/bufferline.nvim'
+" Plug 'akinsho/bufferline.nvim'
 Plug 'moll/vim-bbye'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'akinsho/toggleterm.nvim'
@@ -117,6 +116,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " Git
 Plug 'lewis6991/gitsigns.nvim'
@@ -130,9 +130,10 @@ call plug#end()
 let mapleader = "\<space>"
 
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
-nmap <leader><cr> :source ~/.config/nvim/init.vim<cr>
+nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
 
 nmap <leader>nhl :nohlsearch<CR>
+nmap <leader>rnu :set relativenumber!<CR>
 
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
@@ -171,8 +172,8 @@ nmap <leader>x :!xdg-pen %<CR><CR>
 imap jj <esc>
 
 " Easy insertion of a trailing ; or , from insert mode
-imap ;; <Esc>A;<Esc>
-imap ,, <Esc>A,<Esc>
+" imap ;; <Esc>A;<Esc>
+" imap ,, <Esc>A,<Esc>
 
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
@@ -182,6 +183,9 @@ nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
 nnoremap <leader>o :SymbolsOutline<CR>
+
+" Start search and replace for wortd under cursor
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " Quicker window movement
 " Commented out due to using vim-tmux-navigator
@@ -242,9 +246,32 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').git_branches()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>ca <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
+" nnoremap <leader>ca <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
 
+" Background colors for active vs inactive windows
+hi ActiveWindow guibg=#282A36
+hi InactiveWindow guibg=#30323E
+hi WinSeparator guibg=none
+hi WinSeparator guifg=#5B5D69
 
+" Call method on window enter
+augroup WindowManagement
+  autocmd!
+  autocmd WinEnter * call Handle_Win_Enter()
+  autocmd WinLEave * call Handle_Win_Leave()
+augroup END
+
+" Change highlight group of active/inactive windows
+function! Handle_Win_Enter()
+  setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+  setlocal cc=+1
+  set cursorline 
+endfunction
+
+function Handle_Win_Leave()
+  setlocal cc=0
+  set nocursorline
+endfunction
 
 "--------------------------------------------------------------------------
 " Miscellaneous

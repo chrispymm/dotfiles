@@ -23,7 +23,10 @@
     ~/.dircolors: dircolors
     ~/.gitconfig: gitconfig
     ~/.config/kitty: kitty
+    ~/.config/alacritty: alacritty
     ~/.config/nvim: nvim
+    ~/.config/yabai: yabai
+    ~/.config/skhd: skhd
     ~/.tmux.conf: tmux.conf
     ~/.zshrc: zshrc
     ~/bin: bin

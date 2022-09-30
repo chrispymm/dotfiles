@@ -77,11 +77,15 @@ alias gaa="git add -A"
 alias gs="git status"
 alias gc="git commit -m $1"
 alias gco="git checkout"
+alias gcob="git checkout -b"
+alias grbm="git fetch && git rebase origin/main"
+alias grbi="git rebase -i HEAD~$1"
 alias gpush="git push"
 alias gpull="git pull"
 alias glp="git log --pretty"
 
 # Docker
+alias lzd="lazydocker"
 alias d="docker"
 alias dc="docker-compose"
 alias dce="docker-compose exec"
@@ -143,3 +147,6 @@ export NVM_DIR="$HOME/.nvm"
 eval "$(rbenv init - zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
