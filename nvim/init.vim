@@ -43,8 +43,8 @@ set colorcolumn=+1
 set cursorline
 set laststatus=3
 set winbar=%=%m\ %f
-"disable automatic line wrapping at textwidth use gq to auto-wrap                                             
-"comments to textwidth                                                                                        
+"disable automatic line wrapping at textwidth use gq to auto-wrap
+"comments to textwidth
 set fo=cqj
 
 "--------------------------------------------------------------------------
@@ -82,15 +82,13 @@ Plug 'heavenshell/vim-jsdoc', {
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
-" Plug 'akinsho/bufferline.nvim'
 Plug 'moll/vim-bbye'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'akinsho/toggleterm.nvim'
 Plug 'ahmedkhalf/project.nvim'
 Plug 'windwp/nvim-autopairs' " Autopairs, integrates with both cmp and treesitter
 Plug 'folke/which-key.nvim'
 
-" LSP & Completion 
+" LSP & Completion
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -164,6 +162,9 @@ nnoremap Y yg$
 nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 
 " Open the current file in the default program
 nmap <leader>x :!xdg-pen %<CR><CR>
@@ -216,7 +217,7 @@ nnoremap <leader>= :wincmd =<cr>
 :command! W w
 :command! Q q
 
-" Manually map NetRw shortcut commands 
+" Manually map NetRw shortcut commands
 command! Vex Vexplore
 command! Sex Sexplore
 
@@ -265,7 +266,7 @@ augroup END
 function! Handle_Win_Enter()
   setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
   setlocal cc=+1
-  set cursorline 
+  set cursorline
 endfunction
 
 function Handle_Win_Leave()

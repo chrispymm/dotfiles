@@ -29,7 +29,7 @@ yabai -m config mouse_drop_action            swap
 # general space settings
 yabai -m config layout                       bsp
 yabai -m config top_padding                  15
-yabai -m config bottom_padding               15
+yabai -m config bottom_padding               39
 yabai -m config left_padding                 15
 yabai -m config right_padding                15
 yabai -m config window_gap                   15
@@ -37,11 +37,14 @@ yabai -m config window_gap                   15
 
 # Space labels
 yabai -m space 1 --label "Code"
-yabai -m space 2 --label "FF"
+yabai -m space 2 --label "Firefox"
 yabai -m space 3 --label "Chrome"
-yabai -m space 4 --label "Mail"
-yabai -m space 5 --label "Slack"
-yabai -m space 6 --label "Music"
+yabai -m space 4 --label "Slack"
+yabai -m space 5 --label "Mail"
+yabai -m space 6 --label "Figma"
+yabai -m space 7 --label "Notes"
+yabai -m space 8 --label "Music"
+yabai -m space 9 --label "Misc"
 
 # apps to not manage (ignore)
 yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
@@ -49,10 +52,13 @@ yabai -m rule --add app="^Archive Utility$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Activity Monitor$" layer=above manage=off
 yabai -m rule --add app="^Messages$" manage=off
-#yabai -m rule --add app="^Pika$" manage=off
-#yabai -m rule --add app="^balenaEtcher$" manage=off
-#yabai -m rule --add app="^Creative Cloud$" manage=off
-yabai -m rule --add app="^Logi Options$" manage=off
+yabai -m rule --add app="^1Password$" manage=off
+yabai -m rule --add app="^Lastpass$" manage=off
+yabai -m rule --add app="^Logitech G HUB$" manage=off
+yabai -m rule --add app="^Looking Glass" manage="off"
 #yabai -m rule --add app="^Alfred Preferences$" manage=off
+
+# yabai -m signal --add event=space_changed \
+#     action="osascript -e 'tell application \"Übersicht\" to refresh'"
 
 echo "yabai configuration loaded.."

@@ -97,9 +97,27 @@ alias be="bundle exec"
 # General
 alias vim="nvim"
 
+# switchdesktop() {
+#     typeset -A desktophash
+#     desktophash[0]=29
+#     desktophash[1]=18
+#     desktophash[2]=19
+#     desktophash[3]=20
+#     desktophash[4]=21
+#     desktophash[5]=23
+#     desktophash[6]=22
+#     desktophash[7]=26
+#     desktophash[8]=28
+#     desktophash[9]=25
+#     desktopkey=${desktophash[$1]}
+#     osascript -e "tell application \"System Events\" to key code $desktopkey using control down" && osascript -e "tell application \"Übersicht\" to refresh widget id \"polybar-left-bar-coffee\""
+# }
+# alias switchdesktop=switchdesktop
+
+
 # Always be in tmux
-_not_inside_tmux() { 
-  [[ -z "$TMUX" ]] 
+_not_inside_tmux() {
+  [[ -z "$TMUX" ]]
 }
 
 ensure_tmux_is_running() {
@@ -108,7 +126,7 @@ ensure_tmux_is_running() {
   fi
 }
 
-ensure_tmux_is_running
+#ensure_tmux_is_running
 
 
 # }}}

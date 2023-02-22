@@ -37,3 +37,4 @@
 - shell:
   - [chmod +x ~/bin/tat, Set tat to be executable]
   - [touch ~/Projects.vim, Creating Projects.vim]
+  - [chmod +x ~/bin/polybar-refresh, Set polybar refresh to be executable]
