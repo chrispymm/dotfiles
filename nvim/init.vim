@@ -63,18 +63,18 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-" Plug 'amiorin/vim-project'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'sheerun/vim-polyglot'
-" Plug 'voldikss/vim-floaterm'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'vim-test/vim-test'
+Plug 'preservim/vimux'
 Plug 'heavenshell/vim-jsdoc', {
       \ 'for': ['javascript', 'javascript.jsx','typescript'],
       \ 'do': 'make install'
@@ -90,7 +90,8 @@ Plug 'folke/which-key.nvim'
 
 " LSP & Completion
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+" Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -115,6 +116,9 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
+
+au BufRead,BufNewFile *.njk set filetype=html
+Plug 'glench/vim-jinja2-syntax'
 
 " Git
 Plug 'lewis6991/gitsigns.nvim'
@@ -223,6 +227,22 @@ command! Sex Sexplore
 
 inoremap <C-c> <esc>
 
+" RSpec.vim mappings
+let g:test#runner_commands = ['Rspec', 'Mocha']
+let g:test#javascript#runner = 'mocha'
+let test#javascript#mocha#options = '--recursive'
+
+let test#ruby#rspec#options = '--format progress --require ~/code/support/rspec/quickfix_formatter.rb --format QuickfixFormatter --out quickfix.out'
+let test#strategy = "vimux"
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+
+map <Leader>vq :VimuxCloseRunner<CR>
+map <leader>qf :cg quickfix.out \| cwindow<CR>
+map <Leader>vqf :VimuxCloseRunner<CR> :cg quickfix.out \| cwindow<CR>
 
 "--------------------------------------------------------------------------
 " Commands
