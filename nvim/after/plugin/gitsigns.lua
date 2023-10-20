@@ -1,14 +1,10 @@
-local status_ok, gitsigns = pcall(require, "gitsigns")
-if not status_ok then
-  return
-end
-
-gitsigns.setup {
+require("gitsigns").setup({
   signs = {
     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-    delete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-    topdelete = { hl = "GitSignsDelete", text = "契", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+    delete = { hl = "GitSignsDelete", text = "▎", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+    topdelete = { hl = "GitSignsDelete", text = "▎", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+    -- untracked = { hl = "GitSignsUntracked", text = "▎", numhl = "GitSignsUntrackedNr", linehl = "GitSignsUntrackedLn" },
     changedelete = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
   },
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
@@ -20,7 +16,7 @@ gitsigns.setup {
     follow_files = true,
   },
   attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_opts = {
     virt_text = true,
     virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
@@ -30,6 +26,7 @@ gitsigns.setup {
   current_line_blame_formatter_opts = {
     relative_time = false,
   },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -45,4 +42,4 @@ gitsigns.setup {
   yadm = {
     enable = false,
   },
-}
+})

@@ -1,11 +1,8 @@
-require 'chrispymm.cmp'
-require 'chrispymm.lsp'
-require 'chrispymm.telescope'
-require 'chrispymm.autopairs'
-require 'chrispymm.bufferline'
-require 'chrispymm.gitsigns'
-require 'chrispymm.lualine'
-require 'chrispymm.nvim-tree'
-require 'chrispymm.project'
--- require 'chrispymm.toggleterm'
-require 'chrispymm.autocommands'
+require("chrispymm.set")
+require("chrispymm.remap")
+require("chrispymm.commands")
+require("chrispymm.lazy")
+
+require("lazy").setup("chrispymm.plugins")
+
+vim.api.nvim_command("packadd! matchit")

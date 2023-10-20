@@ -1,12 +1,18 @@
 -- following options are the default
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
-  return
-end
+local nvim_tree = require("nvim-tree")
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
+local function my_on_attach(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- custom mappings
+  vim.keymap.set('n', '<CR>', api.node.open.replace_tree_buffer, opts('Open: In Place'))
 end
 
 nvim_tree.setup({
@@ -43,42 +49,8 @@ nvim_tree.setup({
   view = {
     number = true,
     relativenumber = true,
-    mappings = {
-      list = {
-        -- NOTE: default to editing the file in place, netrw-style
-        {
-          key = { "<C-e>", "o", "<CR>" },
-          action = "edit_in_place",
-        },
-        -- NOTE: override the "split" to avoid treating nvim-tree
-        -- window as special. Splits will appear as if nvim-tree was a
-        -- regular window
-        {
-          key = "<C-v>",
-          action = "split_right",
-          action_cb = function(node)
-            vim.cmd("vsplit " .. vim.fn.fnameescape(node.absolute_path))
-          end,
-        },
-        {
-          key = "<C-x>",
-          action = "split_bottom",
-          action_cb = function(node)
-            vim.cmd("split " .. vim.fn.fnameescape(node.absolute_path))
-          end,
-        },
-        -- NOTE: override the "open in new tab" mapping to fix the error
-        -- that occurs there
-        {
-          key = "<C-t>",
-          action = "new_tab",
-          action_cb = function(node)
-            vim.cmd("tabnew " .. vim.fn.fnameescape(node.absolute_path))
-          end,
-        },
-      },
-    },
   },
+  on_attach = my_on_attach,
   actions = {
     change_dir = {
       -- NOTE: netrw-style, do not change the cwd when navigating
@@ -96,6 +68,17 @@ nvim_tree.setup({
 local winopts = require("nvim-tree.view").View.winopts
 winopts.winfixwidth = false
 winopts.winfixheight = false
+
+local function toggle_replace()
+  local api = require("nvim-tree.api")
+  if api.tree.is_visible() then
+    api.tree.close()
+  else
+    api.node.open.replace_tree_buffer()
+  end
+end
+
+vim.keymap.set("n", "-", toggle_replace)
 
 require("which-key").register({
   ["-"] = {
