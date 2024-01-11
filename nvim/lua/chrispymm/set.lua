@@ -1,16 +1,19 @@
-vim.opt.path:append { "**" }
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.opt.path:append({ "**" })
 
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildmenu = true
 
-vim.opt.wildignore:append { "**/node_modules/*", "**/.git/*" }
+vim.opt.wildignore:append({ "**/node_modules/*", "**/.git/*" })
 
-vim.opt.expandtab = false
+vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.list = true
-vim.opt.listchars = { tab = '▸ ', trail = '·' }
+vim.opt.listchars = { tab = "▸ ", trail = "·" }
 
 vim.opt.signcolumn = "yes:2"
 vim.opt.number = true
@@ -45,4 +48,6 @@ vim.opt.winbar = "%=%m %f"
 vim.opt.fo = "cqj"
 vim.opt.hlsearch = false
 
-
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldenable = false
