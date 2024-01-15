@@ -7,7 +7,7 @@ return {
 			-- Customize or remove this keymap to your liking
 			"<leader>F",
 			function()
-				require("conform").format({ async = true, lsp_fallback = true })
+				require("conform").format({ async = false, lsp_fallback = true })
 			end,
 			mode = "",
 			desc = "Format buffer",
@@ -21,18 +21,11 @@ return {
 				javascript = { "prettier" },
 				css = { "prettier" },
 				scss = { "prettier" },
-				-- typescript = { "prettier" },
-				-- javascriptreact = { "prettier" },
-				-- typescriptreact = { "prettier" },
-				-- svelte = { "prettier" },
-				-- html = { "prettier" },
-				-- json = { "prettier" },
-				-- yaml = { "prettier" },
-				-- markdown = { "prettier" },
-				-- graphql = { "prettier" },
-				ruby = { "rubocop" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
+				--ruby = { "rubocop" }
+				-- Rubocop via confirm does not work - instead we allow fallback
+				-- to lsp (ruby-ls) which uses rubocop as a formatter.
 			},
 			format_on_save = {
 				lsp_fallback = true,

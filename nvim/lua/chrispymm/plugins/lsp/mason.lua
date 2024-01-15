@@ -25,17 +25,15 @@ return {
 			ensure_installed = {
 				"tsserver",
 				"html",
-				"custom_elements_ls",
 				"cssls",
 				"jsonls",
 				"lua_ls",
-				"ruby_ls",
 				"pylsp",
+				"ruby_ls",
+				"rubocop",
 			},
 			handlers = {
 				lsp_zero.default_setup, -- default setup for all mason installed servers
-				ruby_ls = lsp_zero.noop, -- configured manually in lsp-zero.lua
-				lua_ls = lsp_zero.noop, -- configured manually in lsp-zero.lua
 			},
 		})
 
@@ -45,8 +43,9 @@ return {
 				"stylua", -- lua formatter
 				"isort", -- python formatter
 				"black", -- python formatter
-				--     "pylint", -- python linter
-				--     "eslint_d", -- js linter
+				-- "rubocop", -- ruby formatter
+				-- "pylint", -- python linter
+				-- "eslint_d", -- js linter
 			},
 		})
 	end,
