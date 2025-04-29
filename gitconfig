@@ -1,7 +1,7 @@
 [init]
 	defaultBranch = main
 [user]
-	email = chris@chrispymm.co.uk
+	email = chris.pymm@digital.justice.gov.uk
 	name = Chris Pymm
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
@@ -10,8 +10,9 @@
 	clean = git-lfs clean -- %f
 [core]
 	excludesfile = /Users/chris.pymm/.gitignore_global
+	editor = nvim
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
@@ -19,3 +20,7 @@
 [alias]
 	who = blame
 	recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+[pull]
+	rebase = true
+[commit]
+	template = /Users/chris.pymm/.stCommitMsg

@@ -110,7 +110,7 @@ return {
 			})
 		end
 
-		lspconfig.ruby_ls.setup({
+		lspconfig.ruby_lsp.setup({
 			cmd = { "ruby-lsp" },
 			filetypes = { "ruby" },
 			init_options = {
@@ -122,5 +122,18 @@ return {
 				setup_diagnostics(client, buffer)
 			end,
 		})
+
+		lspconfig.stylelint_lsp.setup({
+			settings = {
+				stylelintplus = {
+					autoFixOnFormat = true,
+				},
+			},
+		})
+		lspconfig.eslint.setup({
+settings = {
+ autoFixOnFormat = true,
+}
+})
 	end,
 }

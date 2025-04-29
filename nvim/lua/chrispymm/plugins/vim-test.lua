@@ -4,9 +4,10 @@ return {
 		"preservim/vimux",
 	},
 	config = function()
-		vim.g["test#runner_commands"] = { "Rspec", "Mocha" }
-		vim.g["test#javascript#runner"] = "mocha"
-		vim.g["test#javascript#mocha#options"] = "--recursive"
+		vim.g["test#runner_commands"] = { "Rspec", "jest" }
+		vim.g["test#javascript#runner"] = "jest"
+		vim.g["test#javascript#mocha#options"] = ""
+        vim.g["test#javascript#jest#file_pattern"] = '\\v(__tests__/.*|(spec|test))\\.(js|jsx|mjs|coffee|ts|tsx)$'
 		vim.g["test#ruby#rspec#options"] =
 			"--format progress --require ~/code/support/rspec/quickfix_formatter.rb --format QuickfixFormatter --out quickfix.out"
 		vim.g["test#strategy"] = "vimux"

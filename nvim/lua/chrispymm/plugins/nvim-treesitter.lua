@@ -34,6 +34,7 @@ return {
 				"query",
 				"ruby",
 				"python",
+                "php"
 			},
 			incremental_selection = {
 				enable = true,

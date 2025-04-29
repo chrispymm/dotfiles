@@ -23,14 +23,16 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				"tsserver",
+				"ts_ls",
 				"html",
 				"cssls",
 				"jsonls",
 				"lua_ls",
 				"pylsp",
-				"ruby_ls",
+				"ruby_lsp",
 				"rubocop",
+                "stylelint_lsp",
+                "eslint"
 			},
 			handlers = {
 				lsp_zero.default_setup, -- default setup for all mason installed servers
@@ -44,8 +46,8 @@ return {
 				"isort", -- python formatter
 				"black", -- python formatter
 				-- "rubocop", -- ruby formatter
-				-- "pylint", -- python linter
-				-- "eslint_d", -- js linter
+				"pylint", -- python linter
+				"eslint_d", -- js linter
 			},
 		})
 	end,

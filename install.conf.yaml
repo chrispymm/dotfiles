@@ -25,8 +25,10 @@
     ~/.config/kitty: kitty
     ~/.config/alacritty: alacritty
     ~/.config/nvim: nvim
-    ~/.config/yabai: yabai
-    ~/.config/skhd: skhd
+    ~/.config/fd: fd
+    ~/.config/aerospace: aerospace
+    ~/.config/lazygit: lazygit
+    ~/.config/sketchybar: sketchybar
     ~/.tmux.conf: tmux.conf
     ~/.zshrc: zshrc
     ~/bin: bin

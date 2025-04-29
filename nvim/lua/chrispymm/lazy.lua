@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "chrispymm.plugins" }, { import = "chrispymm.plugins.lsp" } }, {
+require("lazy").setup({ { import = "chrispymm.plugins" }, { import = "chrispymm.plugins.lsp" }, { import = "chrispymm.plugins.dap" } }, {
   install = {
     colorscheme = { "dracula" },
   },

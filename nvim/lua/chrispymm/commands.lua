@@ -20,6 +20,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.njk",
 	callback = function()
-		vim.opt_local.filetype = "html"
+		vim.opt_local.filetype = "html.jinja"
 	end,
 })

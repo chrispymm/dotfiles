@@ -2,6 +2,8 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>ve", "<cmd>e ~/.config/nvim/init.lua<CR>", { desc = "Edit init.lua" })
 -- vim.keymap.set("n", "<leader>vr", "<cmd>so ~/.config/nvim/init.lua<CR>")
+vim.keymap.set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
+vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
 
 vim.keymap.set("n", "<leader>rn", "<cmd>set relativenumber!", { desc = "Toggle relative numbering" })
 
@@ -35,7 +37,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "Y", "yg$")
 
 vim.keymap.set("i", "jj", "<esc>", { desc = "Exit insert mode" })
-vim.keymap.set("i", "jk", "<esc>", { desc = "Exit insert mode" })
+-- vim.keymap.set("i", "jk", "<esc>", { desc = "Exit insert mode" })
 
 vim.keymap.set("n", "<leader>o", "<cmd>SymbolsOutline<CR>", { desc = "View symbols outline for buffer" })
 
@@ -57,7 +59,7 @@ vim.keymap.set("n", "k", function()
 end, { silent = true, expr = true })
 
 -- Start search and replace for word under cursor
-vim.keymap.set("n", "<leader><leader>s", [[%s/\<<C-r><C-w>\>/]], { desc = "Search and replace word under cursor" })
+vim.keymap.set("n", "<leader><leader>s", [[:%s/\<<C-r><C-w>\>/]], { desc = "Search and replace word under cursor" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
@@ -93,3 +95,29 @@ vim.api.nvim_create_user_command("WQ", "wq", {})
 vim.api.nvim_create_user_command("Wq", "wq", {})
 vim.api.nvim_create_user_command("W", "w", {})
 vim.api.nvim_create_user_command("Q", "q", {})
+
+vim.keymap.set("n", "<leader>dx", function()
+	if vim.diagnostic.is_disabled(0) then
+		vim.diagnostic.enable(0)
+	else
+		vim.diagnostic.disable(0)
+	end
+end, { silent = true, noremap = true })
+
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev)
+
+vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+	-- use lsp formattting first
+	-- we want stylint fix and eslint fix to run
+	vim.lsp.buf.format()
+	-- then use formatters
+	-- then we want prettier
+	require("conform").format({
+		lsp_fallback = false,
+		async = true,
+		timeout_ms = 1000,
+	})
+end, { desc = "Format file or range (in visual mode)" })

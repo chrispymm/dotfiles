@@ -15,9 +15,5 @@ osascript <<EOD
     tell application "System Events"
         key code $desktopkey using {control down, option down, command down, shift down}
     end tell
-    delay 0.3
-    tell application id "tracesOf.Uebersicht"
-        refresh
-    end tell
 EOD
 
