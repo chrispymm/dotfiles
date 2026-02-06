@@ -23,3 +23,22 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 		vim.opt_local.filetype = "html.jinja"
 	end,
 })
+-- Function to determine which runner to use based on file path
+local function get_test_runner()
+	local current_file = vim.fn.expand("%:p")
+	if string.match(current_file, "/e2e/") or string.match(current_file, "%.playwright%.spec%.") then
+		return "playwright"
+	else
+		return "jest"
+	end
+end
+
+-- Auto-set the runner based on current file
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = vim.api.nvim_create_augroup("VimTestRunner", { clear = true }),
+	pattern = { "*.js", "*.jsx", "*.mjs", "*.coffee", "*.ts", "*.tsx" },
+	callback = function()
+		local runner = get_test_runner()
+		vim.g["test#javascript#runner"] = runner
+	end,
+})

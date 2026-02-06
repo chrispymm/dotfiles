@@ -409,7 +409,7 @@ function icon_map() {
   "Airmail")
     icon_result=":airmail:"
     ;;
-  "Microsoft Teams")
+  "Microsoft Teams" | "Teams")
     icon_result=":microsoft_teams:"
     ;;
   "Bear")

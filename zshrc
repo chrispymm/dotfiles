@@ -233,3 +233,4 @@ export HERD_PHP_83_INI_SCAN_DIR="/Users/chris.pymm/Library/Application Support/H
 
 # Herd injected PHP 8.4 configuration.
 export HERD_PHP_84_INI_SCAN_DIR="/Users/chris.pymm/Library/Application Support/Herd/config/php/84/"
+export PATH="/usr/local/opt/kubernetes-cli@1.31/bin:$PATH"
